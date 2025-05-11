@@ -1,13 +1,11 @@
 /* Загальний фон сторінки */
 body {
-   font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(to right, #596a89, #cfdef3);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  background-image: url("../img/products.avif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 /* Контейнер */
