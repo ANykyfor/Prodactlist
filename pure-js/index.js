@@ -46,12 +46,15 @@ function renderList() {
 
   totalDisplay.textContent = `Загальна сума: ${total.toFixed(2)} грн`;
 
-  // Оновлюємо textarea
-  const allText = products.map(p => {
-    let line = `${p.name} — ${p.price.toFixed(2)} грн`;
-    if (p.weight) line += `, ${p.weight}`;
-    return line;
-  }).join("\n") + `\n\nЗагальна сума: ${total.toFixed(2)} грн`;
+  
+  const allText =
+    products
+      .map((p) => {
+        let line = `${p.name} — ${p.price.toFixed(2)} грн`;
+        if (p.weight) line += `, ${p.weight}`;
+        return line;
+      })
+      .join("\n") + `\n\nЗагальна сума: ${total.toFixed(2)} грн`;
 
   shareText.value = allText;
 }
@@ -72,7 +75,7 @@ form.addEventListener("submit", (e) => {
     name,
     price,
     weight,
-    checked: false
+    checked: false,
   });
 
   form.reset();
@@ -92,15 +95,15 @@ sendButton.addEventListener("click", () => {
   fetch("http://localhost:3000/send-sms", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       to: phone,
-      message: message
-    })
+      message: message,
+    }),
   })
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       if (data.success) {
         dingSound.play();
         alert("✅ SMS успішно надіслано!");
@@ -108,10 +111,9 @@ sendButton.addEventListener("click", () => {
         alert("❌ Помилка: " + data.error);
       }
     })
-    .catch(err => {
+    .catch((err) => {
       alert("❌ Помилка запиту: " + err.message);
     });
 });
 
-// первинне оновлення списку
 renderList();
